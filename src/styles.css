@@ -1,1 +1,202 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-weight: lighter;
+    background: #202020;
+    color: #ccc;
+    height: 100%;
+  }
+  
+
+.example-table {
+    border: 1px solid #282828;
+    background-color: #111111;
+  }
+  
+  .example-table[tabulator-layout="fitColumns"] .tabulator-header .tabulator-col:last-child {
+    border-right: none;
+  }
+  
+  .example-table .tabulator-header {
+    background-color: #080808;
+  }
+  
+  .example-table .tabulator-header .tabulator-calcs-holder {
+    border-top: 1px solid #393838;
+  }
+  
+  .example-table .tabulator-header .tabulator-calcs-holder .tabulator-row {
+    background-color: #292929 !important;
+  }
+  
+  .example-table .tabulator-header .tabulator-col {
+    border-right-color: #393838;
+    background-color: #101010;
+  }
+  
+  .example-table .tabulator-header .tabulator-col.tabulator-col-group .tabulator-col-group-cols {
+    border-top-color: #393838;
+    border-bottom-color: #393838;
+  }
+  
+  .example-table .tabulator-header .tabulator-col input,
+  .example-table .tabulator-header .tabulator-col select {
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    padding: 4px 10px;
+    border: 1px solid #4b4b4b;
+    border-radius: 2px;
+    background: #1f1f1f;
+    color: #fff;
+    outline: none;
+  }
+  
+  .example-table .tabulator-header .tabulator-col input:focus,
+  .example-table .tabulator-header .tabulator-col select:focus {
+    border-color: #3FB449;
+  }
+  
+  .example-table .tabulator-header .tabulator-col input + input {
+    margin-left: 5px;
+  }
+  
+  .example-table .tabulator-header .tabulator-cell {
+    color: #ccc !important;
+  }
+  
+  .example-table .tabulator-tableholder::-webkit-scrollbar {
+    width: 12px;
+    /* width of the entire scrollbar */
+  }
+  
+  .example-table .tabulator-tableholder::-webkit-scrollbar-track {
+    background: #333;
+    /* color of the tracking area */
+  }
+  
+  .example-table .tabulator-tableholder::-webkit-scrollbar-thumb {
+    background-color: #666;
+    /* color of the scroll thumb */
+    border-radius: 20px;
+    /* roundness of the scroll thumb */
+    border: 3px solid #333;
+    /* creates padding around scroll thumb */
+  }
+  
+  .example-table .tabulator-tableholder::-webkit-scrollbar-corner {
+    background: #222;
+  }
+  
+  .example-table .tabulator-tableholder .tabulator-table {
+    color: #fff;
+    background-color: #111111;
+  }
+  
+  .example-table .tabulator-row {
+    background-color: #151515;
+  }
+  
+  .example-table .tabulator-row.tabulator-row-even {
+    background-color: #202020;
+  }
+  
+  .example-table .tabulator-row.tabulator-selectable:hover {
+    background-color: #000;
+  }
+  
+  .example-table .tabulator-row.tabulator-selected {
+    background-color: #009136;
+  }
+  
+  .example-table .tabulator-row.tabulator-selected:hover {
+    background-color: #00531f;
+  }
+  
+  .example-table .tabulator-row.tabulator-group {
+    border-right-color: #393838;
+  }
+  
+  .example-table .tabulator-row .tabulator-cell {
+    border-right-color: #393838;
+  }
+  
+  .example-table .tabulator-row .tabulator-cell.tabulator-editing {
+    border: 1px solid #3FB449;
+  }
+  
+  .example-table .tabulator-row .tabulator-cell input,
+  .example-table .tabulator-row .tabulator-cell select,
+  .example-table .tabulator-row .tabulator-cell textarea {
+    background-color: #121212;
+    color: #ccc !important;
+  }
+  
+  .example-table .tabulator-row .tabulator-cell .tabulator-data-tree-control {
+    height: 14px;
+    width: 14px;
+    border: 2px solid #3FB449 !important;
+  }
+  
+  .example-table .tabulator-row .tabulator-cell .tabulator-data-tree-control .tabulator-data-tree-control-collapse:after {
+    position: absolute;
+    content: "";
+    left: -3px;
+    top: 2px;
+    height: 2px;
+    width: 6px;
+    background: #3FB449;
+  }
+  
+  .example-table .tabulator-row .tabulator-cell .tabulator-data-tree-control .tabulator-data-tree-control-expand {
+    height: 8px;
+    width: 2px;
+    background: #3FB449;
+  }
+  
+  .example-table .tabulator-row .tabulator-cell .tabulator-data-tree-control .tabulator-data-tree-control-expand:after {
+    position: absolute;
+    content: "";
+    left: -3px;
+    top: 3px;
+    height: 2px;
+    width: 8px;
+    background: #3FB449;
+  }
+  
+  .example-table .tabulator-row .tabulator-cell .tabulator-data-tree-branch {
+    border-left: 2px solid #3FB449;
+    border-bottom: 2px solid #3FB449;
+  }
+  
+  .example-table .tabulator-row .tabulator-responsive-collapse {
+    border-top: 1px solid #393838;
+    border-bottom: 1px solid #393838;
+  }
+  
+  .example-table .tabulator-footer {
+    background-color: #101010;
+  }
+  
+  .example-table .tabulator-footer .tabulator-calcs-holder {
+    border-bottom: 1px solid #393838;
+  }
+  
+  .example-table .tabulator-footer .tabulator-calcs-holder .tabulator-row {
+    background-color: #292929 !important;
+  }
+  
+  .example-table .tabulator-footer .tabulator-page,
+  .example-table .tabulator-footer .tabulator-page-size {
+    background: #ebebeb;
+  }
+  
+  .tabulator-popup,
+  .tabulator-tooltip {
+    color: #000;
+  }
+
+  .tabulator .tabulator-tableholder .tabulator-table {
+    color: #fff !important;
+  }
+  
+  
