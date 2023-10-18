@@ -1,0 +1,43 @@
+.product {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .product img {
+    max-width: 200px;
+    max-height: 200px;
+    margin-right: 10px;
+  }
+  
+  .product-info {
+    flex-grow: 1;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  
+  .description {
+    font-size: 18px;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  
+  .price, .discount, .rating, .stock, .brand, .category {
+    font-size: 16px;
+    margin: 0;
+    margin-bottom: 5px;
+  }
+  
+  .image {
+    max-width: 100%;
+    margin-top: 10px;
+  }

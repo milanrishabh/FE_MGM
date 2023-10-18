@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TabulatorFull as Tabulator } from 'tabulator-tables';
 import { WebSocketService } from '../web-socket.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'mgm-tree-table',
@@ -14,7 +15,7 @@ export class MgmTreeTableComponent implements OnInit, OnDestroy {
   singleProduct: any;
   updatedRecord: any[] = [];
 
-  constructor(private service: WebSocketService) {}
+  constructor(private service: WebSocketService, private router: Router) {}
 
   ngOnInit(): void {
     this.service.connect('ws://localhost:8080');
@@ -121,6 +122,22 @@ export class MgmTreeTableComponent implements OnInit, OnDestroy {
           },
           editor: 'number',
         },
+        {
+          title: 'Action',
+          field: 'id',
+          formatter: function (cell, formatterParams) {
+            var value = cell.getValue();
+            return (
+              "<a href='/product-detail/" +
+              value +
+              "' style='color:#3FB449; font-weight:bold;'>" +
+              value +
+              '</span>'
+            );
+          },
+          width: 30,
+          hozAlign: 'center',
+        },
       ],
     });
 
@@ -128,6 +145,9 @@ export class MgmTreeTableComponent implements OnInit, OnDestroy {
       const self = this;
       this.mainTable.on('rowClick', function (e, row) {
         self.singleProduct = row.getData();
+        // if (self.singleProduct) {
+        //   self.router.navigate(['/product-detail/' + self.singleProduct.id]);
+        // }
       });
       this.mainTable.on('cellEdited', function (cell) {
         const rowIndex = cell.getRow().getIndex();
@@ -151,6 +171,6 @@ export class MgmTreeTableComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.service.close();
+    // this.service.close();
   }
 }

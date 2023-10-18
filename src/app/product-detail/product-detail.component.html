@@ -1,0 +1,14 @@
+<div class="product" *ngIf="product">
+  <img [src]="product?.thumbnail" alt="Product Thumbnail" />
+  <div class="product-info">
+    <h2 class="title">{{ product.title }}</h2>
+    <p class="description">{{ product.description }}</p>
+    <p class="price">Price: {{ product.price }}</p>
+    <p class="discount">Discount: {{ product.discountPercentage }}%</p>
+    <p class="rating">Rating: {{ product.rating }}</p>
+    <p class="stock">Stock: {{ product.stock }}</p>
+    <p class="brand">Brand: {{ product.brand }}</p>
+    <p class="category">Category: {{ product.category }}</p>
+  </div>
+  <img *ngFor="let image of product.images" [src]="image" alt="Product Image" />
+</div>

@@ -14,10 +14,10 @@ export class WebSocketService {
   connect(url: string): void {
     this.socketArray = [];
     this.socket = new WebSocket(url);
-    for (let index = 0; index < this.maxCount; index++) {
-      this.socketArray.push(new WebSocket(url));
-      console.log('Connection Initiated');
-    }
+    // for (let index = 0; index < this.maxCount; index++) {
+    //   this.socketArray.push(new WebSocket(url));
+    //   console.log('Connection Initiated');
+    // }
   }
 
   sendReadRequest(index: number | null): void {
@@ -111,5 +111,13 @@ export class WebSocketService {
     //     console.log('Message Send Event Count: ');
     //   }
     // }
+  }
+
+  getProductDetail(id: number) {
+    const readRequest = {
+      action: 'detail',
+      productId: id,
+    };
+    this.send(readRequest, null);
   }
 }
