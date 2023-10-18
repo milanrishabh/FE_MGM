@@ -34,8 +34,10 @@ export class MgmTreeTableComponent implements OnInit, OnDestroy {
 
     this.service.onMessage((message) => {
       // console.log('Received message from server:', message);
-      if (message.action && message.action == 'edit') {
-        this.mainTable.updateRow(message.rowIndex, message.product);
+      if (message?.action && message?.action == 'edit') {
+        if (message.product) {
+          this.mainTable.updateData([message.product]);
+        }
       } else {
         this.productData = message.products
           ? message.products

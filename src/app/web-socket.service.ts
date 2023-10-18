@@ -32,7 +32,7 @@ export class WebSocketService {
     if (this.socket.readyState === WebSocket.OPEN) {
       if (index) {
         this.socketArray[index].send(JSON.stringify(message));
-        console.log('Send Request Message Count: ');
+        // console.log('Send Request Message Count: ');
       } else {
         this.socket.send(JSON.stringify(message));
       }
