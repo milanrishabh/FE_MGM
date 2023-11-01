@@ -23,7 +23,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.connect('ws://localhost:8080');
+    this.service.connect('ws://172.16.6.47:8080');
 
     this.service.onOpen((index: number | null) => {
       this.service.getProductDetail(this.productId);
@@ -40,6 +40,7 @@ export class ProductDetailComponent implements OnInit {
     this.service.onMessage((message) => {
       if (message.action) {
         // debugger;
+        console.log('Received-detail: ', message);
         if (message.action == 'edit' && Number(message.product.id) == Number(self.productId)) {
           if (
             confirm('New changes has been detected, Do you want to update?') ==

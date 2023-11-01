@@ -18,7 +18,7 @@ export class MgmTreeTableComponent implements OnInit, OnDestroy {
   constructor(private service: WebSocketService, private router: Router) {}
 
   ngOnInit(): void {
-    this.service.connect('ws://localhost:8080');
+    this.service.connect('ws://172.16.6.47:8080');
 
     this.service.onOpen((index: number | null) => {
       this.service.sendReadRequest(index);
@@ -33,8 +33,9 @@ export class MgmTreeTableComponent implements OnInit, OnDestroy {
     });
 
     this.service.onMessage((message) => {
-      // console.log('Received message from server:', message);
+      console.log('Received message from server:', message);
       if (message?.action && message?.action == 'edit') {
+        console.log(message.rowIndex);
         if (message.product) {
           this.mainTable.updateData([message.product]);
         }
