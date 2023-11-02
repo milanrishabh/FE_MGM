@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  wsEndpoint: 'wss://socketsbay.com/wss/v2/1/demo/'
+  wsEndpoint: 'ws://172.16.6.47:8081'
 };
 
 /*

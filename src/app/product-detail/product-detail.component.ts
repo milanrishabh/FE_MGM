@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { WebSocketService } from '../web-socket.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product-detail',
@@ -23,7 +24,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.connect('ws://172.16.6.47:8080');
+    this.service.connect(environment.wsEndpoint);
 
     this.service.onOpen((index: number | null) => {
       this.service.getProductDetail(this.productId);

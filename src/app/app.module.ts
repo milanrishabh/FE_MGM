@@ -6,6 +6,11 @@ import { AppComponent } from './app.component';
 import { MgmTreeTableComponent } from './mgm-tree-table/mgm-tree-table.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 // import { SocketIoModule } from 'ngx-socket-io';
+import {
+  HashLocationStrategy,
+  LocationStrategy,
+  PathLocationStrategy,
+} from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent, MgmTreeTableComponent, ProductDetailComponent],
@@ -14,7 +19,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     AppRoutingModule,
     // SocketIoModule.forRoot({ url: 'ws://localhost:8080' }),
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

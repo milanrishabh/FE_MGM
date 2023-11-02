@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TabulatorFull as Tabulator } from 'tabulator-tables';
 import { WebSocketService } from '../web-socket.service';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'mgm-tree-table',
@@ -14,11 +15,12 @@ export class MgmTreeTableComponent implements OnInit, OnDestroy {
   productData: any;
   singleProduct: any;
   updatedRecord: any[] = [];
+  isProductDetail = false;
 
   constructor(private service: WebSocketService, private router: Router) {}
 
   ngOnInit(): void {
-    this.service.connect('ws://172.16.6.47:8080');
+    this.service.connect(environment.wsEndpoint);
 
     this.service.onOpen((index: number | null) => {
       this.service.sendReadRequest(index);
@@ -131,7 +133,7 @@ export class MgmTreeTableComponent implements OnInit, OnDestroy {
           formatter: function (cell, formatterParams) {
             var value = cell.getValue();
             return (
-              "<a href='/product-detail/" +
+              "<a href='/#/product-detail/" +
               value +
               "' style='color:#3FB449; font-weight:bold;'>" +
               value +
