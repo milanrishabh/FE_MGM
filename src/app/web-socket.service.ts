@@ -113,10 +113,11 @@ export class WebSocketService {
     // }
   }
 
-  getProductDetail(id: number) {
+  getProductDetail(id: number, categoryId: number) {
     const readRequest = {
       action: 'detail',
       productId: id,
+      categoryId: categoryId,
     };
     this.send(readRequest, null);
   }

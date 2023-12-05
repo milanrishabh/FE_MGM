@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ProductDetailComponent implements OnInit {
   productId = 0;
+  categoryId = 0;
   product: any;
 
   constructor(
@@ -17,8 +18,9 @@ export class ProductDetailComponent implements OnInit {
     private service: WebSocketService
   ) {
     this.route.params.subscribe((res) => {
-      if (res['id']) {
+      if (res['id'] && res['categoryId']) {
         this.productId = res['id'];
+        this.categoryId = res['categoryId'];
       }
     });
   }
@@ -27,7 +29,7 @@ export class ProductDetailComponent implements OnInit {
     this.service.connect(environment.wsEndpoint);
 
     this.service.onOpen((index: number | null) => {
-      this.service.getProductDetail(this.productId);
+      this.service.getProductDetail(this.productId, this.categoryId);
     });
 
     this.service.onClose((data: any) => {
@@ -42,7 +44,10 @@ export class ProductDetailComponent implements OnInit {
       if (message.action) {
         // debugger;
         console.log('Received-detail: ', message);
-        if (message.action == 'edit' && Number(message.product.id) == Number(self.productId)) {
+        if (
+          message.action == 'edit' &&
+          Number(message.product.id) == Number(self.productId)
+        ) {
           if (
             confirm('New changes has been detected, Do you want to update?') ==
             true

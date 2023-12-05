@@ -57,28 +57,19 @@ export class MgmTreeTableComponent implements OnInit, OnDestroy {
       data: this.productData,
       dataTree: true,
       layout: 'fitColumns',
-      dataTreeChildField: 'children',
+      dataTreeChildField: 'products',
       dataTreeElementColumn: 'title',
       dataTreeChildIndent: 15,
       dataTreeStartExpanded: false,
       columns: [
         {
-          title: 'Product Name',
+          title: 'Name',
           field: 'title',
           editor: 'input',
           editable: false,
           cellDblClick: function (e, cell) {
             cell.edit(true);
           },
-        },
-        {
-          title: 'Category',
-          field: 'category',
-          editable: false,
-          cellDblClick: function (e, cell) {
-            cell.edit(true);
-          },
-          editor: 'input',
         },
         {
           title: 'Brand',
@@ -131,14 +122,25 @@ export class MgmTreeTableComponent implements OnInit, OnDestroy {
           title: 'Action',
           field: 'id',
           formatter: function (cell, formatterParams) {
+            let parent = cell.getRow().getTreeParent();
+            let catId = 0;
+            if (parent) {
+              catId = parent.getData().id;
+            }
             var value = cell.getValue();
-            return (
-              "<a href='/#/product-detail/" +
-              value +
-              "' style='color:#3FB449; font-weight:bold;'>" +
-              value +
-              '</span>'
-            );
+            if(parent) {
+              return (
+                "<a href='/#/product-detail/" +
+                value +
+                '/' +
+                catId +
+                " ' style='color:#3FB449; font-weight:bold;'>" +
+                value +
+                '</span>'
+              );
+            } else {
+              return '';
+            }
           },
           width: 30,
           hozAlign: 'center',
@@ -155,15 +157,20 @@ export class MgmTreeTableComponent implements OnInit, OnDestroy {
         // }
       });
       this.mainTable.on('cellEdited', function (cell) {
-        const rowIndex = cell.getRow().getIndex();
-        self.sendData(rowIndex, cell.getData());
+        let parent = cell.getRow().getTreeParent();
+        if(parent) {
+          let parentId = parent.getData().id;
+    const rowIndex = cell.getRow().getIndex();
+          self.sendData(parentId, rowIndex, cell.getData());
+        }
       });
     }
   }
 
-  sendData(rowIndex: number, data: any) {
+  sendData(catId: number, rowIndex: number, data: any) {
     const readRequest = {
       action: 'edit',
+      categoryId: catId,
       product: data,
       rowIndex: rowIndex,
     };

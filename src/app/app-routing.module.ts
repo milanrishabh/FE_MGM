@@ -10,7 +10,7 @@ const routes: Routes = [
     component: MgmTreeTableComponent,
   },
   {
-    path: 'product-detail/:id',
+    path: 'product-detail/:id/:categoryId',
     component: ProductDetailComponent,
   },
 ];
