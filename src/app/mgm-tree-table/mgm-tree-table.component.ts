@@ -37,18 +37,68 @@ export class MgmTreeTableComponent implements OnInit, OnDestroy {
     this.service.onMessage((message) => {
       console.log('Received message from server:', message);
       if (message?.action && message?.action == 'edit') {
-        console.log(message.rowIndex);
         if (message.product) {
-          this.mainTable.updateData([message.product]);
+          this.updateExisting(message);
         }
       } else {
-        this.productData = message.products
+        let productData = message.products
           ? message.products
           : message
           ? message
           : [];
+        this.mappingProductJson(productData);
         this.initTabulator();
       }
+    });
+  }
+
+  updateExisting(message: any) {
+    this.productData = this.productData.filter((data: any) => {
+      if (data.id == message.categoryId) {
+        if (data.products) {
+          data.price = 0;
+          data.discountPercentage = 0;
+          data.stock = 0;
+          let productData: any[] = [];
+          data.products.forEach((prd: any) => {
+            let dd = prd;
+            if (prd.id == message.product.id) {
+              dd = message.product;
+            }
+            data.price += dd.price || 0;
+            data.discountPercentage += dd.discountPercentage || 0;
+            data.stock += dd.stock;
+            productData.push(dd);
+          });
+          const average =
+            productData.reduce(
+              (total: any, next: any) => total + next.rating,
+              0
+            ) / 5;
+          data.rating = average;
+          data.products = productData;
+        }
+        this.mainTable.updateData([data]);
+      }
+      return data;
+    });
+  }
+
+  mappingProductJson(productData: any[]) {
+    this.productData = productData.filter((res: any) => {
+      res.price = 0;
+      res.discountPercentage = 0;
+      res.stock = 0;
+      res.products.forEach((prod: any) => {
+        res.price += prod.price || 0;
+        res.discountPercentage += prod.discountPercentage || 0;
+        res.stock += prod.stock;
+      });
+      const average =
+        res.products.reduce((total: any, next: any) => total + next.rating, 0) /
+        5;
+      res.rating = average;
+      return res;
     });
   }
 
@@ -128,7 +178,7 @@ export class MgmTreeTableComponent implements OnInit, OnDestroy {
               catId = parent.getData().id;
             }
             var value = cell.getValue();
-            if(parent) {
+            if (parent) {
               return (
                 "<a href='/#/product-detail/" +
                 value +
@@ -152,15 +202,12 @@ export class MgmTreeTableComponent implements OnInit, OnDestroy {
       const self = this;
       this.mainTable.on('rowClick', function (e, row) {
         self.singleProduct = row.getData();
-        // if (self.singleProduct) {
-        //   self.router.navigate(['/product-detail/' + self.singleProduct.id]);
-        // }
       });
       this.mainTable.on('cellEdited', function (cell) {
         let parent = cell.getRow().getTreeParent();
-        if(parent) {
+        if (parent) {
           let parentId = parent.getData().id;
-    const rowIndex = cell.getRow().getIndex();
+          const rowIndex = cell.getRow().getIndex();
           self.sendData(parentId, rowIndex, cell.getData());
         }
       });
